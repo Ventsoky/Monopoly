@@ -43,86 +43,87 @@ public class Board {
                     "Electricity Tax",
             },
             {
-                "Rock club",
+                    "Rock club",
             },
             {
-                "Mali",
+                    "Mali",
             },
             {
-                "Mezdra Train Station",
+                    "Mezdra Train Station",
             },
             {
-                "Ledenika Street",
+                    "Ledenika Street",
             },
             {
-                "Ledenika Factury",
+                    "Ledenika Factury",
             },
             {
-              "G-town",
+                    "G-town",
             },
             {
-                "Free Parking"
+                    "Free Parking"
             },
             {
-              "Chaika",
+                    "Chaika",
             },
             {
-                "Chance",
+                    "Chance",
             },
             {
-                "The Skuta",
+                    "The Skuta",
             },
             {
-                "Hotel Hemus",
+                    "Hotel Hemus",
             },
             {
-                "Train Station Vidin",
+                    "Train Station Vidin",
             },
             {
-                "Hizhata",
+                    "Hizhata",
             },
             {
-                "Kaulfand",
+                    "Kaulfand",
             },
             {
-              "Billa",
+                    "Billa",
             },
             {
-                "Water Tax",
+                    "Water Tax",
             },
             {
-                "Butka za duneri",
+                    "Butka za duneri",
             },
             {
-                "GO TO JAIL",
+                    "GO TO JAIL",
             },
             {
-                "Duner Butka",
+                    "Duner Butka",
             },
             {
-                "Banicharnica",
+                    "Banicharnica",
             },
             {
-                "Non Stop Shop",
+                    "Non Stop Shop",
             },
             {
-                "Train Station Ruska Biala",
+                    "Train Station Ruska Biala",
             },
             {
-                "Chance",
+                    "Chance",
             },
             {
-                "Hotel Rodina",
+                    "Hotel Rodina",
             },
             {
-                "SUPER TAX",
+                    "SUPER TAX",
             },
             {
-                "Chinese shop",
+                    "Chinese shop",
             }
 
     };
-    public static void writeMas(){
+
+    public static void writeMas() {
         for (int i = 0; i < board.length; i++) {
 
             System.out.println(board[i][0]);
