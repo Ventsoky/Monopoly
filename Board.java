@@ -1,7 +1,7 @@
 package Vencislav;
 
 public class Board {
-    private static String[][] board = {
+    private String[][] board = {
             //      PLACE                      BUY PRICE        OWNER         ID
             {
                     "Start",
@@ -123,11 +123,7 @@ public class Board {
 
     };
 
-    public static void writeMas() {
-        for (int i = 0; i < board.length; i++) {
-
-            System.out.println(board[i][0]);
-
-        }
+    public void writePosition(int pos) {
+        System.out.println(board[pos][0]);
     }
 }
