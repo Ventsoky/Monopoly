@@ -6,24 +6,36 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         Scanner input = new Scanner(System.in);
+        System.out.println("Table for ");
         int playerNumber = input.nextInt();
         Player[] player = new Player[playerNumber];
         for (int i = 0; i < player.length; i++) {
             player[i] = new Player();
         }
+        for (int i = 0; i < playerNumber; i++) {
+            player[i].setPlayerNick(i);
+
+        }
+        for (int i = 0; i < playerNumber; i++) {
+            System.out.println(player[i].getPlayerNick());
+
+        }
         Board board = new Board();
         String playerOption = "";
-        int playerIndex = 0;
+        int l = 0;
         while (!playerOption.equals("0")) {
-            System.out.println("Player" + (playerIndex + 1));
+            System.out.println(player[l].getPlayerNick());
             playerOption = input.next();
-            player[playerIndex].throwDice1();
-            player[playerIndex].throwDice2();
-            player[playerIndex].playerMovement();
-            board.writePosition(player[playerIndex].playerPosition());
-            playerIndex++;
-            if (playerIndex == player.length) {
-                playerIndex = 0;
+            player[l].playerMovement();
+            board.boardPos(player[l].playerPosition(), player[l].getPlayerNick());
+            board.setOwner(player[l].playerPosition(), player[l].getPlayerNick());
+            if(board.setOwner(player[l].playerPosition(), player[l].getPlayerNick())){
+                player[l].addLocation(board.placeOwner(player[l].playerPosition()));
+            }
+            player[l].writeBelongings();
+            l++;
+            if (l == player.length) {
+                l = 0;
             }
         }
 
