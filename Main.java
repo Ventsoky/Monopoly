@@ -27,17 +27,23 @@ public class Main {
             System.out.println(player[l].getPlayerNick());
             playerOption = input.next();
             player[l].playerMovement();
-            board.boardPos(player[l].playerPosition(), player[l].getPlayerNick());
-            board.setOwner(player[l].playerPosition(), player[l].getPlayerNick());
-            if(board.setOwner(player[l].playerPosition(), player[l].getPlayerNick())){
-                player[l].addLocation(board.placeOwner(player[l].playerPosition()));
+            board.boardPos(player[l].getPossition(), player[l].getPlayerNick());
+            if(board.isFree(player[l].getPossition())){
+                if(board.isBuying()){
+                    board.setOwner(player[l].getPossition(), player[l].getPlayerNick());
+                    player[l].addLocation(board.boardPos(player[l].getPossition()));
+                }
             }
+
             player[l].writeBelongings();
+
             l++;
             if (l == player.length) {
                 l = 0;
             }
         }
+        System.out.println(board.quickCheck());
 
     }
+
 }

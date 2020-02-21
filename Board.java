@@ -9,7 +9,7 @@ public class Board {
     public String[][] board = {
             //      PLACE                      BUY PRICE        OWNER         ID
             {
-                    "Start","","",""
+                    "Start", "", "Bank", ""
             },
             {
                     "Okolchitsa st.", "60", "", "1"
@@ -21,7 +21,7 @@ public class Board {
                     "bul. July", "90", "", "1"
             },
             {
-                    "Income Tax","","",""
+                    "Income Tax", "", "Bank", ""
             },
             {
                     "Vratsa Train Station", "200", "", "train"
@@ -30,7 +30,7 @@ public class Board {
                     "Kaleto", "100", "", "2"
             },
             {
-                    "Chance","","",""
+                    "Chance", "", "Bank", ""
             },
             {
                     "Dunav Bridge", "110", "", "2"
@@ -39,13 +39,13 @@ public class Board {
                     "Dunav Bridge2", "120", "", "2"
             },
             {
-                    "Jail Visiting","","",""
+                    "Jail Visiting", "", "Bank", ""
             },
             {
                     "Sumi", "150", "", "3"
             },
             {
-                    "Electricity Tax",
+                    "Electricity Tax", "", "Bank", ""
             },
             {
                     "Rock club", "160", "", "3"
@@ -66,13 +66,13 @@ public class Board {
                     "G-town", "180", "", "4"
             },
             {
-                    "Free Parking","","",""
+                    "Free Parking", "", "Bank", ""
             },
             {
                     "Chaika", "180", "", "5"
             },
             {
-                    "Chance","","",""
+                    "Chance", "", "Bank", ""
             },
             {
                     "The Skuta", "190", "", "5"
@@ -93,13 +93,13 @@ public class Board {
                     "Billa", "230", "", "6"
             },
             {
-                    "Water Tax","","",""
+                    "Water Tax", "", "Bank", ""
             },
             {
                     "Butka za duneri", "310", "", "7"
             },
             {
-                    "GO TO JAIL","","",""
+                    "GO TO JAIL", "", "", ""
             },
             {
                     "Duner Butka", "320", "", "7"
@@ -114,42 +114,55 @@ public class Board {
                     "Train Station Ruska Biala", "200", "", "train"
             },
             {
-                    "Chance","","",""
+                    "Chance", "", "Bank", ""
             },
             {
                     "Hotel Rodina", "360", "", "8"
             },
             {
-                    "SUPER TAX","","",""
+                    "SUPER TAX", "", "Bank", ""
             },
             {
                     "Chinese shop", "370", "", "8"
             }
 
     };
+    private boolean isBuying;
+    private boolean isBankBelonging;
+
+    public String quickCheck() {
+        String check = "no";
+        for (int i = 0; i < board.length; i++) {
+
+            if (board[i][0].equals("Duner Butka"))
+                check = board[i][2];
+        }
+        return check;
+    }
 
     public String boardPos(int pos, String owner) {
         System.out.println(board[pos][0]);
 
-        if (board[pos][2] != ""&&!isBankBelonging(pos)) {
+        if (!board[pos][2].equals("") && !isBankBelonging(pos)) {
             System.out.print(" Owner:" + owner);
         }
 
         return board[pos][0];
     }
-    public String placeOwner(int pos){
-            return board[pos][2];
+    public String boardPos(int i){
+        return board[i][0];
     }
 
-    public boolean setOwner(int i, String owner) {
-        if (!isBankBelonging(i) && board[i][2] == "") {
-            if (isBuying()) {
-                board[i][2] = owner;
-                return true;
-            }
-            return false;
-        }
-        return false;
+    public String placeOwner(int pos) {
+        return board[pos][2];
+    }
+
+    public boolean isFree(int i) {
+        return !board[i][2].equals("");
+    }
+
+    public void setOwner(int i, String owner) {
+        board[i][2] = owner;
     }
 
     public boolean isBankBelonging(int i) {
@@ -161,14 +174,17 @@ public class Board {
     public boolean isBuying() {
         System.out.println("Would you like to buy this property? Write \'y\' fore yes or \'n\' for no");
         char choiceToBuy = input.next().charAt(0);
-//        if (choiceToBuy != 'n' && choiceToBuy != 'y') {
-//            System.out.println("Wrong input.");
-//            return isBuying();
-//        }
-        if (choiceToBuy == 'n') {
+        if (choiceToBuy != 'n' && choiceToBuy != 'y') {
+            System.out.println("Wrong input.");
+            return isBuying();
+        } else if (choiceToBuy == 'n') {
             return false;
+        } else if (choiceToBuy == 'y') {
+            System.out.println("You bought this property!");
+            return true;
         }
-        return true;
+        return false;
     }
+
+
 }
-//TODO There is bug with bankBelongings or isBuying repair them

@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 =5;
+    private int dice1 = 5;
     private int dice2 = 5;
     private int position;
     private String playerNick;
@@ -28,11 +28,7 @@ public class Player {
 
 //    }
 
-    public int playerPosition() {
-        if (position + dice1 + dice2 > 38) {
-            position = (dice1 + dice2) - Math.abs(position - 38) - 1;
-            money += 200;
-        } else position += dice1 + dice2;
+    public int getPossition() {
         return position;
 
     }
@@ -41,6 +37,10 @@ public class Player {
 
 //        throwDice1();
 //        throwDice2();
+        if (position + dice1 + dice2 > 38) {
+            position = (dice1 + dice2) - Math.abs(position - 38) - 1;
+            money += 200;
+        } else position = position + dice1 + dice2;
         System.out.println("You threw " + dice1 + " and " + dice2 + ". So you move " + (dice1 + dice2));
     }
 
@@ -70,7 +70,6 @@ public class Player {
     public int getMoney() {
         return money;
     }
-
-
+//TODO Fix the positions - they don't return the right things.
 
 }
