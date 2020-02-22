@@ -1,7 +1,5 @@
 package Vencislav;
 
-import javafx.geometry.HPos;
-
 import java.util.Scanner;
 
 public class Board {
@@ -99,7 +97,7 @@ public class Board {
                     "Butka za duneri", "310", "", "7"
             },
             {
-                    "GO TO JAIL", "", "", ""
+                    "GO TO JAIL", "", "Bank", ""
             },
             {
                     "Duner Butka", "320", "", "7"
@@ -127,56 +125,68 @@ public class Board {
             }
 
     };
-    private boolean isBuying;
-    private boolean isBankBelonging;
 
-    public String quickCheck() {
-        String check = "no";
-        for (int i = 0; i < board.length; i++) {
 
-            if (board[i][0].equals("Duner Butka"))
-                check = board[i][2];
-        }
-        return check;
-    }
 
+    /*
+    Types in the console where the player is
+    Types in the console if this place has an owner different than "Bank"
+    Returns he position the player is on
+     */
     public String boardPos(int pos, String owner) {
-        System.out.println(board[pos][0]);
+        System.out.print(board[pos][0]);
 
         if (!board[pos][2].equals("") && !isBankBelonging(pos)) {
-            System.out.print(" Owner:" + owner);
+            System.out.println(" Owner:" + board[pos][2]);
         }
+        else System.out.println();
 
         return board[pos][0];
     }
-    public String boardPos(int i){
+    /*
+    Returns the position only
+     */
+    public String boardPos(int i) {
         return board[i][0];
     }
 
+    /*
+    Returns the owner of the place
+     */
     public String placeOwner(int pos) {
         return board[pos][2];
     }
-
+/*
+    Checks if the place has owner
+ */
     public boolean isFree(int i) {
-        return !board[i][2].equals("");
+        return board[i][2].equals("");
     }
 
+    /*
+    Sets the new owner of the place
+     */
     public void setOwner(int i, String owner) {
         board[i][2] = owner;
     }
-
+    /*
+    Checks if the property is owned by the Bank
+     */
     public boolean isBankBelonging(int i) {
         if (i == 0 || i == 4 || i == 7 || i == 10 || i == 12 || i == 19 || i == 21 || i == 28 || i == 30 || i == 35 || i == 37)
             return true;
         else return false;
     }
-
-    public boolean isBuying() {
+    /*
+    Asks and checks if player is buying the place
+     */
+    public boolean isBuying(int pos) {
         System.out.println("Would you like to buy this property? Write \'y\' fore yes or \'n\' for no");
+        System.out.println("The place costs: "+ board[pos][1]);
         char choiceToBuy = input.next().charAt(0);
         if (choiceToBuy != 'n' && choiceToBuy != 'y') {
             System.out.println("Wrong input.");
-            return isBuying();
+            return isBuying(pos);
         } else if (choiceToBuy == 'n') {
             return false;
         } else if (choiceToBuy == 'y') {
@@ -184,6 +194,12 @@ public class Board {
             return true;
         }
         return false;
+    }
+    /*
+    returns the price of the place
+     */
+    public int price(int pos){
+        return Integer.parseInt(board[pos][1]);
     }
 
 

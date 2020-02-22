@@ -8,27 +8,27 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 = 5;
-    private int dice2 = 5;
+    private int dice1 = 2;
+    private int dice2 = 4;
     private int position;
     private String playerNick;
     private int money = 1500;
     private List belongings = new ArrayList();
 
 
-//    private int throwDice1() {
-//        dice1 = rand.nextInt(6) + 1;
-//        return dice1;
-//
-//    }
-//
-//    private int throwDice2() {
-//        dice2 = rand.nextInt(6) + 1;
-//        return dice2;
+    private int throwDice1() {
+        dice1 = rand.nextInt(6) + 1;
+        return dice1;
 
-//    }
+    }
 
-    public int getPossition() {
+    private int throwDice2() {
+        dice2 = rand.nextInt(6) + 1;
+        return dice2;
+
+    }
+
+    public int getPosition() {
         return position;
 
     }
@@ -70,6 +70,37 @@ public class Player {
     public int getMoney() {
         return money;
     }
-//TODO Fix the positions - they don't return the right things.
+
+    public void buyingProperty(int price) {
+        money -= price;
+    }
+
+    public boolean hasEnoughMoney(int price) {
+        if(money - price >= 0 )
+            return true;
+        System.out.println("Not enough money!");
+        return false;
+    }
+    public void getPlayerMenu(){
+        System.out.println("Type \"money\" to see how much money you have.");
+        System.out.println("Type \"props\" to see the places you own");
+        System.out.println("Type \"end\" to end your turn");
+    }
+    public void playerMenu(String option){
+        switch (option){
+            case "money":
+                System.out.println(money);
+                playerMenu(option = input.next());
+                break;
+            case "props":
+                writeBelongings();
+                playerMenu(option = input.next());
+            case "end":
+                break;
+            default:
+                System.out.println("Wrong input. Try again!");
+                playerMenu(option = input.next());
+        }
+    }
 
 }
