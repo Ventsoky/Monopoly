@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 = 2;
+    private int dice1 = 1;
     private int dice2 = 4;
     private int position;
     private String playerNick;
@@ -76,31 +76,41 @@ public class Player {
     }
 
     public boolean hasEnoughMoney(int price) {
-        if(money - price >= 0 )
+        if (money - price >= 0)
             return true;
         System.out.println("Not enough money!");
         return false;
     }
-    public void getPlayerMenu(){
+
+    public void getPlayerMenu() {
         System.out.println("Type \"money\" to see how much money you have.");
         System.out.println("Type \"props\" to see the places you own");
         System.out.println("Type \"end\" to end your turn");
     }
-    public void playerMenu(String option){
-        switch (option){
+
+    public void playerMenu() {
+        String option = input.next();
+        switch (option) {
             case "money":
                 System.out.println(money);
-                playerMenu(option = input.next());
+                playerMenu();
                 break;
             case "props":
                 writeBelongings();
-                playerMenu(option = input.next());
+                playerMenu();
             case "end":
                 break;
             default:
                 System.out.println("Wrong input. Try again!");
-                playerMenu(option = input.next());
+                playerMenu();
         }
+    }
+
+    public void beingCharged(int fee) {
+        money -= fee;
+    }
+    public void receiveMoney(int receive){
+        money += receive;
     }
 
 }
