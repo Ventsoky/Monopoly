@@ -116,16 +116,35 @@ public class Player {
         money += receive;
     }
 
-//    public void drawCard() {
-//        throwDice1();
-//        switch (dice1) {
-//            case 0:
-//                System.out.println("FBI! Open up! I know what you have done. Get in the prison son");
-//                getInPrison();
-//                break;
-//                case
-//        }
-//    }
+    public void drawCard() {
+        throwDice1();
+        switch (dice1) {
+            case 1:
+                System.out.println("FBI! Open up! I know what you have done. Get in the prison son");
+                getInPrison();
+                break;
+            case 2:
+                System.out.println("It's your lucky day! You can escape from the jail for free with this pass!");
+                prisonBreakPass++;
+                break;
+            case 3:
+                System.out.println("You wanted to try your luck with a lotary ticked \nSo you tried.\n And you tried again and again and " +
+                        "again...\n After all that you understood that you wasted 200 leva.");
+                beingCharged(200);
+                break;
+            case 4:
+                System.out.println("Wow what a lucky dude. You just won 200 leva from a lotarry ticket");
+                receiveMoney(200);
+            case 5:
+                System.out.println("You've been daylight robbed.\nYou are now 50 leva behind");
+                beingCharged(50);
+                break;
+            case 6:
+                System.out.println("What a day man!\nYou fell down stars.\nYou broke your hand.\nWent to hospital.\nAnd then you found 50 leva in your pocket.\nSuch a lucky dude");
+                receiveMoney(50);
+                break;
+        }
+    }
 
     public boolean isInPrison() {
         return isInPrison;
