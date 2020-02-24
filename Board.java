@@ -1,10 +1,14 @@
 package Vencislav;
 
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class Board {
     private Scanner input = new Scanner(System.in);
-    public String[][] board = {
+    private Random random = new Random();
+    private String[][] board = {
             //      PLACE                      BUY PRICE        OWNER         ID     FEE
             {
                     "Start", "", "Bank", "", "0"
@@ -126,12 +130,21 @@ public class Board {
 
     };
 
+    public void getInfo(String check){
+        for (int i = 0; i < board.length; i++) {
+            if(board[i][0].equals(check)){
+                System.out.println(i);
+                break;
+            }
+        }
+    }
 
     /*
     Types in the console where the player is
     Types in the console if this place has an owner different than "Bank"
     Returns he position the player is on
      */
+
     public String boardPos(int pos) {
         System.out.print(board[pos][0]);
 
@@ -200,7 +213,7 @@ public class Board {
     /*
     returns the price of the place
      */
-    public int price(int pos) {
+    public int placePrize(int pos) {
         return Integer.parseInt(board[pos][1]);
     }
 
@@ -211,5 +224,11 @@ public class Board {
     public int feeTax(int i) {
         return Integer.parseInt(board[i][4]);
     }
-
+    
+    public boolean chance(int i){
+        return board[i][0].equals("Chance");
+    }
+    public boolean getsInJail(int pos){
+        return board[pos][0].equals("GO TO JAIL");
+    }
 }

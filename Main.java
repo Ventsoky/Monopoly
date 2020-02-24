@@ -20,22 +20,35 @@ public class Main {
         int l = 0;
 
         while (!playerOption.equals("0")) {
+            if(player[l].isInPrison()){
+                if(player[l].usesPrisonPass()){
+                    player[l].getOutOfPrison();
+                }
+                player[l].getOutOfPrison();
+                nextPlayer(l,playerNumber);
+                continue;
+            }
             System.out.println(player[l].getPlayerNick());
             playerOption = input.next();
             player[l].playerMovement();
             int pos = player[l].getPosition();
             board.boardPos(pos);
-
-            if (board.isFree(pos)) {
+            if (board.getsInJail(pos)){
+                System.out.println("You are now in prison for your bad crimes.");
+                player[l].getInPrison();
+                nextPlayer(l,playerNumber);
+                continue;
+            }
+            else if (board.isFree(pos)) {
                 if (board.isBuying(pos)) {
-                    if (player[l].hasEnoughMoney(board.price(pos))) {
+                    if (player[l].hasEnoughMoney(board.placePrize(pos))) {
                         board.setOwner(pos, player[l].getPlayerNick());
-                        player[l].buyingProperty(board.price(pos));
+                        player[l].buyingProperty(board.placePrize(pos));
                         player[l].addLocation(board.bPos(pos));
                     }
                 }
             }
-            if (!board.ownsThePlace(pos, player[l].getPlayerNick())) {
+            else if (!board.ownsThePlace(pos, player[l].getPlayerNick())) {
                 player[l].beingCharged(board.feeTax(pos));
                 for (int i = 0; i < playerNumber; i++) {
                     if(board.ownsThePlace(pos,player[i].getPlayerNick())){
@@ -47,10 +60,14 @@ public class Main {
             player[l].getPlayerMenu();
 
             player[l].playerMenu();
-            l++;
-            if (l == player.length) {
-                l = 0;
-            }
+            nextPlayer(l,playerNumber);
+        }
+    }
+
+    private static void nextPlayer(int l, int length) {
+        l++;
+        if (l == length) {
+            l = 0;
         }
     }
 

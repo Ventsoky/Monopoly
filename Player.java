@@ -8,12 +8,14 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 = 1;
+    private int dice1 = 26;
     private int dice2 = 4;
     private int position;
     private String playerNick;
     private int money = 1500;
     private List belongings = new ArrayList();
+    private boolean isInPrison;
+    private int prisonBreakPass;
 
 
     private int throwDice1() {
@@ -109,8 +111,45 @@ public class Player {
     public void beingCharged(int fee) {
         money -= fee;
     }
-    public void receiveMoney(int receive){
+
+    public void receiveMoney(int receive) {
         money += receive;
     }
+
+//    public void drawCard() {
+//        throwDice1();
+//        switch (dice1) {
+//            case 0:
+//                System.out.println("FBI! Open up! I know what you have done. Get in the prison son");
+//                getInPrison();
+//                break;
+//                case
+//        }
+//    }
+
+    public boolean isInPrison() {
+        return isInPrison;
+    }
+
+    public void getInPrison() {
+        isInPrison = true;
+    }
+
+    public void getOutOfPrison() {
+        isInPrison = false;
+    }
+
+    public boolean usesPrisonPass() {
+        if (isInPrison && prisonBreakPass > 0) {
+            System.out.println("Would you like to use your free break pass? Type 'y' or whatever if you don't want to");
+            char choice = input.next().charAt(0);
+            if (choice == 'y') {
+                prisonBreakPass--;
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
