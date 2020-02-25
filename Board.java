@@ -130,9 +130,9 @@ public class Board {
 
     };
 
-    public void getInfo(String check){
+    public void getInfo(String check) {
         for (int i = 0; i < board.length; i++) {
-            if(board[i][0].equals(check)){
+            if (board[i][0].equals(check)) {
                 System.out.println(i);
                 break;
             }
@@ -224,11 +224,33 @@ public class Board {
     public int feeTax(int i) {
         return Integer.parseInt(board[i][4]);
     }
-    
-    public boolean chance(int i){
+
+    public boolean chance(int i) {
         return board[i][0].equals("Chance");
     }
-    public boolean getsInJail(int pos){
+
+    public boolean getsInJail(int pos) {
         return board[pos][0].equals("GO TO JAIL");
+    }
+
+    public int getSellPrize(String place) {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][0].equals(place)) {
+                return Integer.parseInt(board[i][1]) / 2;
+            }
+        }
+        return 0;
+    }
+
+    public void removeOwner(String place) {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][0].equals(place)) {
+                board[i][0] = "";
+            }
+        }
+    }
+
+    public void removeProperty(int i) {
+        board[i][2] = "";
     }
 }

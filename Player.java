@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 = 26;
+    private int dice1 = 2;
     private int dice2 = 4;
     private int position;
     private String playerNick;
@@ -65,8 +65,9 @@ public class Player {
         }
     }
 
-    public void sellProp(int i) {
-        belongings.remove(i);
+
+    public void removeProp(int i) {
+        belongings.remove(i - 1);
     }
 
     public int getMoney() {
@@ -87,25 +88,7 @@ public class Player {
     public void getPlayerMenu() {
         System.out.println("Type \"money\" to see how much money you have.");
         System.out.println("Type \"props\" to see the places you own");
-        System.out.println("Type \"end\" to end your turn");
-    }
-
-    public void playerMenu() {
-        String option = input.next();
-        switch (option) {
-            case "money":
-                System.out.println(money);
-                playerMenu();
-                break;
-            case "props":
-                writeBelongings();
-                playerMenu();
-            case "end":
-                break;
-            default:
-                System.out.println("Wrong input. Try again!");
-                playerMenu();
-        }
+        System.out.println("Type \"close\" to close this menu");
     }
 
     public void beingCharged(int fee) {
@@ -120,7 +103,7 @@ public class Player {
         throwDice1();
         switch (dice1) {
             case 1:
-                System.out.println("FBI! Open up! I know what you have done. Get in the prison son");
+                System.out.println("FBI! Open up!\n I know what you have done.\n Get in the prison son!");
                 getInPrison();
                 break;
             case 2:
@@ -170,5 +153,43 @@ public class Player {
         return false;
     }
 
+    public String getPropToSell(int i) {
+        return belongings.get(i - 1).toString();
+    }
 
+    public boolean isSellingProp() {
+        System.out.println("Do you really want to sell this property? Type 'y' to sell it or 'n' if you don't want to.");
+        char choice = input.next().charAt(0);
+        if (choice == 'y') {
+            return true;
+        }
+        return false;
+    }
+
+    public int chooseProp() {
+        System.out.println("Choose the index of property you want to sell.");
+        int choice = input.nextInt();
+        return choice;
+    }
+
+    public void playerMenu() {
+        String option = input.next();
+        switch (option) {
+            case "money":
+                System.out.println(getMoney());
+                playerMenu();
+                break;
+
+            case "props":
+                writeBelongings();
+                playerMenu();
+                break;
+            case "close":
+                System.out.println("You closed quick check menu");
+                break;
+            default:
+                System.out.println("Wrong input. Try again!");
+                playerMenu();
+        }
+    }
 }
