@@ -16,6 +16,7 @@ public class Main {
         for (int i = 0; i < playerNumber; i++) {
             player[i].setPlayerNick(i);
         }
+        board.getInfo();
         int l = 0;
         while (true) {
             if (player[l].isInPrison()) {
@@ -46,12 +47,14 @@ public class Main {
                 }
             }
             if(board.isChancePos(pos)){
-                
+                player[l].drawCard();
             }
             else if (!board.ownsThePlace(pos, player[l].getPlayerNick())) {
                 player[l].beingCharged(board.feeTax(pos));
+                System.out.println("You've been charged with " + board.feeTax(pos) + " leva.");
                 for (int i = 0; i < playerNumber; i++) {
                     if (board.ownsThePlace(pos, player[i].getPlayerNick())) {
+                        System.out.println("And player " + player[i].getPlayerNick()+" took them.");
                         player[i].receiveMoney(board.feeTax(pos));
                     }
                 }
@@ -76,9 +79,11 @@ public class Main {
                                     player[l].writeBelongings();
                                     int choice = player[l].chooseProp();
                                     if (player[l].isSellingProp()) {
+                                        System.out.println("You sold your property: "+player[l].getCertainBelong(choice-1));
                                         player[l].receiveMoney(board.getSellPrize(player[l].getPropToSell(choice)));
                                         board.removeOwner(player[l].getPropToSell(choice));
                                         player[l].removeProp(choice);
+
                                     }
                                     break;
                                 default:
@@ -113,4 +118,3 @@ public class Main {
         System.out.println("Type \"close\" to close this menu");
     }
 }
-//TODO create the chance option

@@ -19,10 +19,10 @@ public class Board {
                     "Okolchitsa st.", "60", "", "1", "30"
             },
             {
-                    "Bratq Miladinovi st.", "80", "", "1", "40"
+                    "Community chest", "", "Bank", "", "0"
             },
             {
-                    "bul. July", "90", "", "1", "50"
+                    "Bratq Miladinovi st.", "80", "", "1", "40"
             },
             {
                     "Income Tax", "", "Bank", "", "50"
@@ -64,6 +64,9 @@ public class Board {
                     "Ledenika Street", "160", "", "4", "80"
             },
             {
+                    "Community chest", "", "Bank", "", "0"
+            },
+            {
                     "Ledenika Factury", "170", "", "4", "85"
             },
             {
@@ -94,9 +97,6 @@ public class Board {
                     "Kaulfand", "220", "", "6", "110"
             },
             {
-                    "Billa", "230", "", "6", "120"
-            },
-            {
                     "Water Tax", "", "Bank", "", "150"
             },
             {
@@ -106,10 +106,13 @@ public class Board {
                     "GO TO JAIL", "", "Bank", "", "0"
             },
             {
-                    "Duner Butka", "320", "", "7", "160"
+                    "Billa", "320", "", "7", "160"
             },
             {
                     "Banicharnica", "330", "", "7", "170"
+            },
+            {
+                    "Community chest", "", "Bank", "", "0"
             },
             {
                     "Non Stop Shop", "350", "", "8", "180"
@@ -132,13 +135,8 @@ public class Board {
 
     };
 
-    public void getInfo(String check) {
-        for (int i = 0; i < board.length; i++) {
-            if (board[i][0].equals(check)) {
-                System.out.println(i);
-                break;
-            }
-        }
+    public void getInfo() {
+        System.out.println(board.length);
     }
 
     /*
@@ -149,7 +147,6 @@ public class Board {
 
     public String boardPos(int pos) {
         System.out.print(board[pos][0]);
-
         if (!board[pos][2].equals("") && !isBankBelonging(pos)) {
             System.out.println(" Property of: " + board[pos][2]);
         } else System.out.println();
@@ -189,7 +186,7 @@ public class Board {
     Checks if the property is owned by the Bank
      */
     public boolean isBankBelonging(int i) {
-        if (i == 0 || i == 4 || i == 7 || i == 10 || i == 12 || i == 19 || i == 21 || i == 28 || i == 30 || i == 35 || i == 37)
+        if (board[i][2].equals("Bank"))
             return true;
         else return false;
     }
@@ -231,7 +228,7 @@ public class Board {
     }
 
     public boolean isChancePos(int i) {
-        return board[i][0].equals("Chance");
+        return board[i][0].equals("Chance")||board[i][0].equals("Community chest");
     }
 
     public boolean getsInJail(int pos) {

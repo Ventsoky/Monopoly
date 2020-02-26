@@ -9,11 +9,11 @@ public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
     private int dice1 = 2;
-    private int dice2 = 4;
+    private int dice2 = 0;
     private int position;
     private String playerNick;
     private int money = 1500;
-    private List belongings = new ArrayList();
+    private List<String> belongings = new ArrayList();
     private boolean isInPrison;
     private int prisonBreakPass;
 
@@ -65,6 +65,9 @@ public class Player {
         }
     }
 
+    public String  getCertainBelong(int i){
+       return belongings.get(i);
+    }
 
     public void removeProp(int i) {
         belongings.remove(i - 1);
@@ -118,12 +121,13 @@ public class Player {
             case 4:
                 System.out.println("Wow what a lucky dude. You just won 200 leva from a lotarry ticket");
                 receiveMoney(200);
+                break;
             case 5:
                 System.out.println("You've been daylight robbed.\nYou are now 50 leva behind");
                 beingCharged(50);
                 break;
             case 6:
-                System.out.println("What a day man!\nYou fell down stars.\nYou broke your hand.\nWent to hospital.\nAnd then you found 50 leva in your pocket.\nSuch a lucky dude");
+                System.out.println("What a day man!\nYou fell down stairs.\nYou broke your hand.\nWent to hospital.\nAnd then you found 50 leva in your pocket.\nSuch a lucky dude");
                 receiveMoney(50);
                 break;
         }
@@ -160,16 +164,12 @@ public class Player {
     public boolean isSellingProp() {
         System.out.println("Do you really want to sell this property? Type 'y' to sell it or 'n' if you don't want to.");
         char choice = input.next().charAt(0);
-        if (choice == 'y') {
-            return true;
-        }
-        return false;
+        return choice == 'y';
     }
 
     public int chooseProp() {
         System.out.println("Choose the index of property you want to sell.");
-        int choice = input.nextInt();
-        return choice;
+        return input.nextInt();
     }
 
     public void playerMenu() {
