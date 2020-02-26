@@ -252,7 +252,10 @@ public class Board {
         }
     }
 
-    public void removeProperty(int i) {
-        board[i][2] = "";
+    public void setNewOwner(String name, String place){
+        for (int i = 0; i < board.length; i++) {
+            if(place.equals(board[i][0]));
+                board[i][2] = name;
+        }
     }
 }

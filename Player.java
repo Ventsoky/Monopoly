@@ -9,7 +9,7 @@ public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
     private int dice1 = 2;
-    private int dice2 = 0;
+    private int dice2 = 4;
     private int position;
     private String playerNick;
     private int money = 1500;
@@ -94,7 +94,7 @@ public class Player {
         System.out.println("Type \"close\" to close this menu");
     }
 
-    public void beingCharged(int fee) {
+    public void loseMoney(int fee) {
         money -= fee;
     }
 
@@ -116,7 +116,7 @@ public class Player {
             case 3:
                 System.out.println("You wanted to try your luck with a lotary ticked \nSo you tried.\n And you tried again and again and " +
                         "again...\n After all that you understood that you wasted 200 leva.");
-                beingCharged(200);
+                loseMoney(200);
                 break;
             case 4:
                 System.out.println("Wow what a lucky dude. You just won 200 leva from a lotarry ticket");
@@ -124,7 +124,7 @@ public class Player {
                 break;
             case 5:
                 System.out.println("You've been daylight robbed.\nYou are now 50 leva behind");
-                beingCharged(50);
+                loseMoney(50);
                 break;
             case 6:
                 System.out.println("What a day man!\nYou fell down stairs.\nYou broke your hand.\nWent to hospital.\nAnd then you found 50 leva in your pocket.\nSuch a lucky dude");
@@ -192,4 +192,9 @@ public class Player {
                 playerMenu();
         }
     }
+    public boolean acceptsTrade(){
+        System.out.println("Do you accept trade? Type 'y' if you accept.");
+        return input.next().equals("y");
+    }
+
 }
