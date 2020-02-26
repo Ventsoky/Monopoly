@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Board {
     private Scanner input = new Scanner(System.in);
     private Random random = new Random();
+    private boolean isBuying;
+    private boolean ownsPlace;
     private String[][] board = {
             //      PLACE                      BUY PRICE        OWNER         ID     FEE
             {
@@ -195,19 +197,22 @@ public class Board {
     /*
     Asks and checks if player is buying the place
      */
-    public boolean isBuying(int pos) {
+    public void isBuying(int pos) {
         System.out.println("Would you like to buy this property? Write \'y\' for yes or \'n\' for no");
         System.out.println("The place costs: " + board[pos][1]);
         char choiceToBuy = input.next().charAt(0);
         if (choiceToBuy != 'n' && choiceToBuy != 'y') {
             System.out.println("Wrong input.");
-            return isBuying(pos);
+            isBuying(pos);
         } else if (choiceToBuy == 'n') {
-            return false;
+            isBuying = false;
         } else if (choiceToBuy == 'y') {
             System.out.println("You bought this property!");
+            isBuying = true;
         }
-        return true;
+    }
+    public boolean getIsBuying(){
+        return isBuying;
     }
 
     /*
@@ -225,7 +230,7 @@ public class Board {
         return Integer.parseInt(board[i][4]);
     }
 
-    public boolean chance(int i) {
+    public boolean isChancePos(int i) {
         return board[i][0].equals("Chance");
     }
 
@@ -245,7 +250,7 @@ public class Board {
     public void removeOwner(String place) {
         for (int i = 0; i < board.length; i++) {
             if (board[i][0].equals(place)) {
-                board[i][0] = "";
+                board[i][2] = "";
             }
         }
     }

@@ -36,14 +36,19 @@ public class Main {
                 nextPlayer(l, playerNumber);
                 continue;
             } else if (board.isFree(pos)) {
-                if (board.isBuying(pos)) {
+                board.isBuying(pos);
+                if (board.getIsBuying()) {
                     if (player[l].hasEnoughMoney(board.placePrize(pos))) {
                         board.setOwner(pos, player[l].getPlayerNick());
                         player[l].buyingProperty(board.placePrize(pos));
                         player[l].addLocation(board.bPos(pos));
                     }
                 }
-            } else if (!board.ownsThePlace(pos, player[l].getPlayerNick())) {
+            }
+            if(board.isChancePos(pos)){
+                
+            }
+            else if (!board.ownsThePlace(pos, player[l].getPlayerNick())) {
                 player[l].beingCharged(board.feeTax(pos));
                 for (int i = 0; i < playerNumber; i++) {
                     if (board.ownsThePlace(pos, player[i].getPlayerNick())) {
@@ -54,16 +59,17 @@ public class Main {
             System.out.println("Type \"menu\" to open the list of menus");
             String chooseMenu = input.next();
             if (chooseMenu.equalsIgnoreCase("menu")) {
+                menuOptions();
                 while (!chooseMenu.equalsIgnoreCase("end")) {
-                    menuOptions();
                     chooseMenu = input.next();
                     if (chooseMenu.equalsIgnoreCase("menu1")) {
                         player[l].getPlayerMenu();
                         player[l].playerMenu();
                     }
                     if (chooseMenu.equalsIgnoreCase("menu2")) {
+                        menu2Options();
                         while (!chooseMenu.equalsIgnoreCase("close")) {
-                            menu2Options();
+
                             chooseMenu = input.next();
                             switch (chooseMenu) {
                                 case "sell":
