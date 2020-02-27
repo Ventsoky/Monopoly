@@ -196,5 +196,8 @@ public class Player {
         System.out.println("Do you accept trade? Type 'y' if you accept.");
         return input.next().equals("y");
     }
+    public boolean isOutOfMoney(){
+        return money<=0;
+    }
 
 }
