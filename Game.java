@@ -12,17 +12,14 @@ public class Game{
             if(game.jailBlock()){
                 continue;
             }
-
             game.normalPlace();
-
             game.chanceOrCommunityChest();
-
             game.charging();
-
             game.menu();
-
+            game.playerOut();
+            if(game.isGameOver())
+                break;
             game.nextPlayer();
-
         }
     }
 }

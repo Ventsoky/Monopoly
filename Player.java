@@ -8,14 +8,14 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 = 2;
-    private int dice2 = 4;
+    private int dice1 = 28;
+    private int dice2 = 2;
     private int position;
     private String playerNick;
     private int money = 1500;
     private List<String> belongings = new ArrayList();
     private boolean isInPrison;
-    private int prisonBreakPass;
+    private int prisonBreakPass = 1;
 
 
     private int throwDice1() {
@@ -198,6 +198,9 @@ public class Player {
     }
     public boolean isOutOfMoney(){
         return money<=0;
+    }
+    public int getPropsSize(){
+        return belongings.size();
     }
 
 }

@@ -210,7 +210,7 @@ public class GameLogic {
 
     public void nextPlayer() {
         l++;
-        if (l == player.length) {
+        if (l >= player.length) {
             l = 0;
         }
     }
@@ -225,6 +225,39 @@ public class GameLogic {
         System.out.println("Type \"sell\" to sell property");
         System.out.println("Type \"trade\" to trade with player");
         System.out.println("Type \"close\" to close this menu");
+    }
+    public void playerOut(){
+        if(player[l].isOutOfMoney()){
+            if(player[l].getPropsSize()<1){
+                System.out.println(player[l].getPlayerNick()+", you lost!");
+                removePlayer();
+            }
+            else {
+                sell();
+                playerOut();
+            }
+        }
+    }
+
+    private void removePlayer() {
+        Player[] resize = new Player[playerNumber-1];
+        int j = 0;
+        for (int i = 0; i < resize.length; i++) {
+            if(i!=l){
+                resize[j] = player[i];
+                j++;
+            }
+        }
+        playerNumber--;
+        player = new Player[playerNumber];
+        player = resize;
+    }
+    public boolean isGameOver(){
+        if(player.length==1){
+            System.out.println(player[0].getPlayerNick()+", won the game!");
+            return true;
+        }
+        return false;
     }
 
 }
