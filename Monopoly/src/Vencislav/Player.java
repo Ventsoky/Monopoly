@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 = 28;
+    private int dice1 = 4;
     private int dice2 = 2;
     private int position;
     private String playerNick;
@@ -17,9 +17,7 @@ public class Player {
     private boolean isInPrison;
     private int prisonBreakPass;
 
-/*
-Throws The dices
- */
+
     private void throwDice1() {
         dice1 = rand.nextInt(6) + 1;
 
@@ -28,17 +26,15 @@ Throws The dices
     private void throwDice2() {
         dice2 = rand.nextInt(6) + 1;
     }
-/*
-Returns position of the player
- */
+
     public int getPosition() {
         return position;
 
     }
 
     public void playerMovement() {
-        throwDice1();
-        throwDice2();
+//        throwDice1();
+//        throwDice2();
         if (position + dice1 + dice2 > 38) {
             position = (dice1 + dice2) - Math.abs(position - 38) - 1;
             money += 200;
@@ -65,14 +61,15 @@ Returns position of the player
         }
     }
 
-    public String  getCertainBelong(int i){
-       return belongings.get(i);
+    public String getCertainBelong(int i) {
+        return belongings.get(i - 1);
     }
 
     public void removeProp(int i) {
         belongings.remove(i - 1);
     }
-    public int getPropsSize(){
+
+    public int getPropsSize() {
         return belongings.size();
     }
 
@@ -91,9 +88,10 @@ Returns position of the player
         return false;
     }
 
-    public boolean isOutOfMoney(){
-        return money<=0;
+    public boolean isOutOfMoney() {
+        return money <= 0;
     }
+
     public void loseMoney(int fee) {
         money -= fee;
     }
@@ -198,11 +196,15 @@ Returns position of the player
                 playerMenu();
         }
     }
-    public boolean acceptsTrade(){
+
+    public boolean acceptsTrade() {
         System.out.println("Do you accept trade? Type 'y' if you accept.");
         return input.next().equals("y");
     }
 
-
+    public boolean wantsToUpgrade() {
+        System.out.println("Would you like to upgrade this property. Type 'y' if you want to");
+        return input.next().equals("y");
+    }
 
 }

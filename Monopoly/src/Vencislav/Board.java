@@ -13,124 +13,124 @@ public class Board {
     private String[][] board = {
             //      PLACE                      BUY PRICE        OWNER         ID     FEE
             {
-                    "Start", "", "Bank", "", "0"
+                    "Start", "0", "Bank", "", "0", ""
             },
             {
-                    "Okolchitsa st.", "60", "", "1", "30"
+                    "Okolchitsa st.", "60", "", "1", "30", ""
             },
             {
-                    "Community chest", "", "Bank", "", "0"
+                    "Community chest", "0", "Bank", "", "0", ""
             },
             {
-                    "Bratq Miladinovi st.", "80", "", "1", "40"
+                    "Bratq Miladinovi st.", "80", "", "1", "40", ""
             },
             {
-                    "Income Tax", "", "Bank", "", "50"
+                    "Income Tax", "50", "Bank", "", "", ""
             },
             {
-                    "Vratsa Train Station", "200", "", "train", "70"
+                    "Vratsa Train Station", "200", "", "train", "70", ""
             },
             {
-                    "Kaleto", "100", "", "2", "50"
+                    "Kaleto", "100", "", "2", "50", ""
             },
             {
-                    "Chance", "", "Bank", "", "0"
+                    "Chance", "0", "Bank", "", "0", ""
             },
             {
-                    "Dunav Bridge", "110", "", "2", "55"
+                    "Dunav Bridge", "110", "", "2", "55", ""
             },
             {
-                    "Dunav Bridge2", "120", "", "2", "60"
+                    "Dunav Bridge2", "120", "", "2", "60", ""
             },
             {
-                    "Jail Visiting", "", "Bank", "", "0"
+                    "Jail Visiting", "0", "Bank", "", "0", ""
             },
             {
-                    "Sumi", "150", "", "3", "70"
+                    "Sumi", "150", "", "3", "70", ""
             },
             {
-                    "Electricity Tax", "", "Bank", "", "100"
+                    "Electricity Tax", "100", "Bank", "", "100", ""
             },
             {
-                    "Rock club", "160", "", "3", "80"
+                    "Rock club", "160", "", "3", "80", ""
             },
             {
-                    "Mali", "170", "", "3", "80"
+                    "Mali", "170", "", "3", "80", ""
             },
             {
-                    "Mezdra Train Station", "200", "", "train", "70"
+                    "Mezdra Train Station", "200", "", "train", "70", ""
             },
             {
-                    "Ledenika Street", "160", "", "4", "80"
+                    "Ledenika Street", "160", "", "4", "80", ""
             },
             {
-                    "Community chest", "", "Bank", "", "0"
+                    "Community chest", "0", "Bank", "", "0", ""
             },
             {
-                    "Ledenika Factury", "170", "", "4", "85"
+                    "Ledenika Factury", "170", "", "4", "85", ""
             },
             {
-                    "G-town", "180", "", "4", "90"
+                    "G-town", "180", "", "4", "90", ""
             },
             {
-                    "Free Parking", "", "Bank", "", "0"
+                    "Free Parking", "0", "Bank", "", "0", ""
             },
             {
-                    "Chaika", "180", "", "5", "90"
+                    "Chaika", "180", "", "5", "90", ""
             },
             {
-                    "Chance", "", "Bank", "", "0"
+                    "Chance", "0", "Bank", "", "0", ""
             },
             {
-                    "The Skuta", "190", "", "5", "95"
+                    "The Skuta", "190", "", "5", "95", ""
             },
             {
-                    "Hotel Hemus", "200", "", "5", "100"
+                    "Hotel Hemus", "200", "", "5", "100", ""
             },
             {
-                    "Train Station Vidin", "200", "", "train", "70"
+                    "Train Station Vidin", "200", "", "train", "70", ""
             },
             {
-                    "Hizhata", "210", "", "6", "105"
+                    "Hizhata", "210", "", "6", "105", ""
             },
             {
-                    "Kaulfand", "220", "", "6", "110"
+                    "Kaulfand", "220", "", "6", "110", ""
             },
             {
-                    "Water Tax", "", "Bank", "", "150"
+                    "Water Tax", "150", "Bank", "", "150", ""
             },
             {
-                    "Butka za duneri", "310", "", "7", "150"
+                    "Butka za duneri", "310", "", "7", "150", ""
             },
             {
-                    "GO TO JAIL", "", "Bank", "", "0"
+                    "GO TO JAIL", "0", "Bank", "", "0", ""
             },
             {
-                    "Billa", "320", "", "7", "160"
+                    "Billa", "320", "", "7", "160", ""
             },
             {
-                    "Banicharnica", "330", "", "7", "170"
+                    "Banicharnica", "330", "", "7", "170", ""
             },
             {
-                    "Community chest", "", "Bank", "", "0"
+                    "Community chest", "0", "Bank", "", "0", ""
             },
             {
-                    "Non Stop Shop", "350", "", "8", "180"
+                    "Non Stop Shop", "350", "", "8", "180", ""
             },
             {
-                    "Train Station Ruska Biala", "200", "", "train", "70"
+                    "Train Station Ruska Biala", "200", "", "train", "70", ""
             },
             {
-                    "Chance", "", "Bank", "", "0"
+                    "Chance", "0", "Bank", "", "0", ""
             },
             {
-                    "Hotel Rodina", "360", "", "8", "180"
+                    "Hotel Rodina", "360", "", "8", "180", ""
             },
             {
-                    "SUPER TAX", "", "Bank", "", "200"
+                    "SUPER TAX", "200", "Bank", "", "200", ""
             },
             {
-                    "Chinese shop", "370", "", "8", "190"
+                    "Chinese shop", "370", "", "8", "190", ""
             }
 
     };
@@ -159,13 +159,6 @@ public class Board {
      */
     public String bPos(int i) {
         return board[i][0];
-    }
-
-    /*
-    Returns the owner of the place
-     */
-    public String placeOwner(int pos) {
-        return board[pos][2];
     }
 
     /*
@@ -208,7 +201,8 @@ public class Board {
             isBuying = true;
         }
     }
-    public boolean getIsBuying(){
+
+    public boolean getIsBuying() {
         return isBuying;
     }
 
@@ -223,12 +217,8 @@ public class Board {
         return nick == board[i][2] || board[i][2].equals("");
     }
 
-    public int feeTax(int i) {
-        return Integer.parseInt(board[i][4]);
-    }
-
     public boolean isChancePos(int i) {
-        return board[i][0].equals("Chance")||board[i][0].equals("Community chest");
+        return board[i][0].equals("Chance") || board[i][0].equals("Community chest");
     }
 
     public boolean getsInJail(int pos) {
@@ -252,11 +242,41 @@ public class Board {
         }
     }
 
-    public void setNewOwner(String name, String place){
+    public void setNewOwner(String name, String place) {
         for (int i = 0; i < board.length; i++) {
-            if(place.equals(board[i][0]));
-                board[i][2] = name;
+            if (place.equals(board[i][0])) ;
+            board[i][2] = name;
         }
+    }
+
+    public boolean canBeUpgraded(String place) {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][5].equals(place))
+                if (board[i][5].length() < 3)
+                    return true;
+        }
+        return false;
+    }
+
+    public void upgradeProperty(String place) {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][0].equals(place)) {
+                board[i][5] += "|";
+            }
+        }
+    }
+
+    public int upgradePrice(String place) {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][0].equals(place)) {
+                return (Integer.parseInt(board[i][1]) / 2) + (Integer.parseInt(board[i][1]) * (board[i][5].length())) / 10;
+            }
+        }
+        return 0;
+    }
+
+    public int feeTax(int i) {
+        return (Integer.parseInt(board[i][1]) / 2) + ((Integer.parseInt(board[i][1]) * board[i][5].length())) / 11;
     }
 
 }
