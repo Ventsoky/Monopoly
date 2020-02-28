@@ -12,19 +12,20 @@ public class GameLogic {
 
 
     public void gameSetUp() {
-        System.out.println("Enter the how many players would play Monopoly. ");
+        System.out.println("Enter the how many players are going to play Monopoly. ");
         System.out.println("It should be number between 2 and 4");
         playerNumber = input.nextInt();
-        if(playerNumber<2||playerNumber>4){
+        if (playerNumber < 2 || playerNumber > 4) {
             System.out.println("You entered wrong player number. Try again!");
             gameSetUp();
-        }
-        player = new Player[playerNumber];
-        for (int i = 0; i < player.length; i++) {
-            player[i] = new Player();
-        }
-        for (int i = 0; i < playerNumber; i++) {
-            player[i].setPlayerNick(i);
+        } else {
+            player = new Player[playerNumber];
+            for (int i = 0; i < player.length; i++) {
+                player[i] = new Player();
+            }
+            for (int i = 0; i < playerNumber; i++) {
+                player[i].setPlayerNick(i);
+            }
         }
     }
 
@@ -35,62 +36,55 @@ public class GameLogic {
             System.out.println(i + 1 + ": " + player[i].getPlayerNick());
         }
         int playerIndexTrade = input.nextInt() - 1;
-        if(playerIndexTrade==l){
+        if (playerIndexTrade == l) {
             System.out.println("You cannot trade with yourself");
             trade();
+        } else {
+            if (playerIndexTrade > 0 || playerIndexTrade < player.length) {
+                System.out.println("Money you'd like to give");
+                int money = input.nextInt();
+                if (player[l].hasEnoughMoney(money)) {
+                    int placeToGive = 0;
+                    if (player[l].getPropsSize() > 0) {
+                        System.out.println("Place you want to give");
+                        player[l].writeBelongings();
+                        System.out.println("Type 0 if you don't to trade any of your places.");
+                        placeToGive = input.nextInt();
+                    }
+                    System.out.println("Money you'd like to receive: ");
+                    int moneyToReceive = input.nextInt();
+                    int placeToReceive = 0;
+                    if (player[playerIndexTrade].getPropsSize() > 0) {
+                        System.out.println("Place you want from the player: ");
+                        player[playerIndexTrade].writeBelongings();
+                        System.out.println("Type 0 if you don't want any place to receive.");
+                        placeToReceive = input.nextInt();
+                    }
+                    if (player[playerIndexTrade].hasEnoughMoney(moneyToReceive)) {
+                        theTradingOverview(money, placeToGive, placeToReceive, moneyToReceive, l, playerIndexTrade, player);
+                    }
+                    if (player[playerIndexTrade].acceptsTrade()) {
+                        player[l].receiveMoney(moneyToReceive - money);
+                        player[playerIndexTrade].receiveMoney(money - moneyToReceive);
+
+                        if (placeToGive > 0) {
+                            board.setNewOwner(player[playerIndexTrade].getPlayerNick(), player[l].getCertainBelong(placeToGive));
+                            player[playerIndexTrade].addLocation(player[l].getCertainBelong(placeToGive));
+                        }
+
+                        if (placeToReceive > 0) {
+                            board.setNewOwner(player[l].getPlayerNick(), player[playerIndexTrade].getCertainBelong(placeToReceive));
+                            player[l].addLocation(player[playerIndexTrade].getCertainBelong(placeToReceive));
+                        }
+                        if (placeToGive > 0)
+                            player[l].removeProp(placeToGive);
+                        if (placeToReceive > 0)
+                            player[playerIndexTrade].removeProp(placeToReceive);
+                        System.out.println("Trade accepted.");
+                    }
+                }
+            } else System.out.println("Not such player");
         }
-        if (playerIndexTrade > 0 || playerIndexTrade < player.length) {
-            System.out.println("Money you'd like to give");
-            int money = input.nextInt();
-            if (player[l].hasEnoughMoney(money)) {
-                int placeToGive = 0;
-                if (player[l].getPropsSize() > 0) {
-                    System.out.println("Place you want to give");
-                    player[l].writeBelongings();
-                    System.out.println("Type 0 if you don't to trade any of your places.");
-                    placeToGive = input.nextInt();
-                }
-                if(player[l].getPropsSize()>=placeToGive){
-                    System.out.println("Error!");
-                    trade();
-                }
-                System.out.println("Money you'd like to receive: ");
-                int moneyToReceive = input.nextInt();
-                int placeToReceive = 0;
-                if (player[playerIndexTrade].getPropsSize() > 0) {
-                    System.out.println("Place you want from the player: ");
-                    player[playerIndexTrade].writeBelongings();
-                    System.out.println("Type 0 if you don't want any place to receive.");
-                    placeToReceive = input.nextInt();
-                }
-                if (player[playerIndexTrade].getPropsSize() < placeToReceive){
-                    System.out.println("Error");
-                    trade();
-                }
-                if (player[playerIndexTrade].hasEnoughMoney(moneyToReceive)) {
-                    theTradingOverviel(money, placeToGive, placeToReceive, moneyToReceive, l, playerIndexTrade, player);
-                }
-                if (player[playerIndexTrade].acceptsTrade()) {
-                    player[l].receiveMoney(moneyToReceive - money);
-                    player[playerIndexTrade].receiveMoney(money - moneyToReceive);
-
-                    if (placeToGive > 0) {
-                        board.setNewOwner(player[playerIndexTrade].getPlayerNick(), player[l].getCertainBelong(placeToGive));
-                        player[playerIndexTrade].addLocation(player[l].getCertainBelong(placeToGive));
-                    }
-
-                    if (placeToReceive > 0) {
-                        board.setNewOwner(player[l].getPlayerNick(), player[playerIndexTrade].getCertainBelong(placeToReceive));
-                        player[l].addLocation(player[playerIndexTrade].getCertainBelong(placeToReceive));
-                    }
-                    if (placeToGive > 0)
-                        player[l].removeProp(placeToGive);
-                    if (placeToReceive > 0)
-                        player[playerIndexTrade].removeProp(placeToReceive);
-                    System.out.println("Trade accepted.");
-                }
-            }
-        } else System.out.println("Not such player");
     }
 
     private void sell() {
@@ -219,9 +213,8 @@ public class GameLogic {
     }
 
     public void playerSetUp() {
-        System.out.println(player[l].getPlayerNick() + ", it's your turn. Throw the dices by typing anything!");
-        String throwDice = input.nextLine();
-        if (throwDice.equals("")) ;
+        System.out.println(player[l].getPlayerNick() + ", it's your turn! Throw the dices by typing anything.");
+        String throwDice = input.next();
         player[l].playerMovement();
         pos = player[l].getPosition();
         board.boardPos(pos);
@@ -241,7 +234,7 @@ public class GameLogic {
         return false;
     }
 
-    public static void theTradingOverviel(int moneyToGive, int placeToGive, int placeToReceive, int moneyToReceive, int l, int playerIndexTrade, Player[] player) {
+    public static void theTradingOverview(int moneyToGive, int placeToGive, int placeToReceive, int moneyToReceive, int l, int playerIndexTrade, Player[] player) {
         System.out.println(player[playerIndexTrade].getPlayerNick());
         System.out.println("You've been offered:");
         if (moneyToGive > 0)
@@ -263,8 +256,8 @@ public class GameLogic {
     }
 
     public static void menuOptions() {
-        System.out.println("Menu 1: Check your money/props - just type \"menu1\"");
-        System.out.println("Menu 2: Check your selling/trading - just type \"menu2\"");
+        System.out.println("Menu 1: Check your money or props - just type \"menu1\"");
+        System.out.println("Menu 2: To trade, sell or upgrade property - just type \"menu2\"");
         System.out.println("To end your turn type \"end\"");
     }
 

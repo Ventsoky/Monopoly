@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1 = 4;
-    private int dice2 = 2;
+    private int dice1;
+    private int dice2;
     private int position;
     private String playerNick;
     private int money = 1500;
@@ -33,8 +33,8 @@ public class Player {
     }
 
     public void playerMovement() {
-//        throwDice1();
-//        throwDice2();
+        throwDice1();
+        throwDice2();
         if (position + dice1 + dice2 > 38) {
             position = (dice1 + dice2) - Math.abs(position - 38) - 1;
             money += 200;
@@ -104,7 +104,7 @@ public class Player {
         throwDice1();
         switch (dice1) {
             case 1:
-                System.out.println("FBI! Open up!\n I know what you have done.\n Get in the prison son!");
+                System.out.println("FBI! Open up!\nI know what you have done.\nGet in the prison son!");
                 getInPrison();
                 break;
             case 2:
@@ -112,7 +112,7 @@ public class Player {
                 prisonBreakPass++;
                 break;
             case 3:
-                System.out.println("You wanted to try your luck with a lotary ticked \nSo you tried.\n And you tried again and again and " +
+                System.out.println("You wanted to try your luck with a lotary ticked \nSo you tried.\nAnd you tried again and again and " +
                         "again...\n After all that you understood that you wasted 200 leva.");
                 loseMoney(200);
                 break;
@@ -180,15 +180,18 @@ public class Player {
         String option = input.next();
         switch (option) {
             case "money":
+            case "1":
                 System.out.println(getMoney());
                 playerMenu();
                 break;
 
             case "props":
+            case "2":
                 writeBelongings();
                 playerMenu();
                 break;
             case "close":
+            case "3":
                 System.out.println("You closed quick check menu");
                 break;
             default:
