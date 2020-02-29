@@ -13,13 +13,13 @@ public class Board {
     private String[][] board = {
             //      PLACE                      BUY PRICE        OWNER         ID     FEE
             {
-                    "Start", "0", "Bank", "", "0", ""
+                    "Start", "0", "Banku", "", "0", ""
             },
             {
                     "Okolchitsa st.", "60", "", "1", "30", ""
             },
             {
-                    "Community chest", "0", "Bank", "", "0", ""
+                    "Community chest", "0", "Banku", "", "0", ""
             },
             {
                     "Bratq Miladinovi st.", "80", "", "1", "40", ""
@@ -34,7 +34,7 @@ public class Board {
                     "Kaleto", "100", "", "2", "50", ""
             },
             {
-                    "Chance", "0", "Bank", "", "0", ""
+                    "Chance", "0", "Banku", "", "0", ""
             },
             {
                     "Dunav Bridge", "110", "", "2", "55", ""
@@ -43,7 +43,7 @@ public class Board {
                     "Dunav Bridge2", "120", "", "2", "60", ""
             },
             {
-                    "Jail Visiting", "0", "Bank", "", "0", ""
+                    "Jail Visiting", "0", "Banku", "", "0", ""
             },
             {
                     "Sumi", "150", "", "3", "70", ""
@@ -64,7 +64,7 @@ public class Board {
                     "Ledenika Street", "160", "", "4", "80", ""
             },
             {
-                    "Community chest", "0", "Bank", "", "0", ""
+                    "Community chest", "0", "Banku", "", "0", ""
             },
             {
                     "Ledenika Factury", "170", "", "4", "85", ""
@@ -73,13 +73,13 @@ public class Board {
                     "G-town", "180", "", "4", "90", ""
             },
             {
-                    "Free Parking", "0", "Bank", "", "0", ""
+                    "Free Parking", "0", "Banku", "", "0", ""
             },
             {
                     "Chaika", "180", "", "5", "90", ""
             },
             {
-                    "Chance", "0", "Bank", "", "0", ""
+                    "Chance", "0", "Banku", "", "0", ""
             },
             {
                     "The Skuta", "190", "", "5", "95", ""
@@ -103,7 +103,7 @@ public class Board {
                     "Butka za duneri", "310", "", "7", "150", ""
             },
             {
-                    "GO TO JAIL", "0", "Bank", "", "0", ""
+                    "GO TO JAIL", "0", "Banku", "", "0", ""
             },
             {
                     "Billa", "320", "", "7", "160", ""
@@ -112,7 +112,7 @@ public class Board {
                     "Banicharnica", "330", "", "7", "170", ""
             },
             {
-                    "Community chest", "0", "Bank", "", "0", ""
+                    "Community chest", "0", "Banku", "", "0", ""
             },
             {
                     "Non Stop Shop", "350", "", "8", "180", ""
@@ -121,7 +121,7 @@ public class Board {
                     "Train Station Ruska Biala", "200", "", "train", "70", ""
             },
             {
-                    "Chance", "0", "Bank", "", "0", ""
+                    "Chance", "0", "Banku", "", "0", ""
             },
             {
                     "Hotel Rodina", "360", "", "8", "180", ""
@@ -179,7 +179,7 @@ public class Board {
     Checks if the property is owned by the Bank
      */
     public boolean isBankBelonging(int i) {
-        if (board[i][2].equals("Bank"))
+        if (board[i][2].equals("Banku"))
             return true;
         else return false;
     }
@@ -251,7 +251,7 @@ public class Board {
 
     public boolean canBeUpgraded(String place) {
         for (int i = 0; i < board.length; i++) {
-            if (board[i][5].equals(place))
+            if (board[i][0].equals(place))
                 if (board[i][5].length() < 3)
                     return true;
         }

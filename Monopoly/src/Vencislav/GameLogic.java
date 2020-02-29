@@ -87,26 +87,12 @@ public class GameLogic {
         }
     }
 
-    private void sell() {
-        player[l].writeBelongings();
-        int choice = player[l].chooseProp();
-        if (player[l].isSellingProp()) {
-            System.out.println("You sold your property: " + player[l].getCertainBelong(choice - 1));
-            player[l].receiveMoney(board.getSellPrize(player[l].getPropToSell(choice)));
-            board.removeOwner(player[l].getPropToSell(choice));
-            player[l].removeProp(choice);
-        }
-    }
-
     public void upgrade() {
         if (player[l].getPropsSize() > 0) {
             player[l].writeBelongings();
-            System.out.println("Enter the property you want to sell.");
+            System.out.println("Enter the property you want to upgrade.");
             int playerChoice = input.nextInt();
-            if (playerChoice > player[l].getPropsSize() || playerChoice < player[l].getPropsSize()) {
-                System.out.println("Non such property");
-                upgrade();
-            }
+
             String place = player[l].getCertainBelong(playerChoice);
             if (board.canBeUpgraded(place)) {
                 if (player[l].hasEnoughMoney(board.upgradePrice(place))) {
@@ -121,6 +107,16 @@ public class GameLogic {
         } else System.out.println("You don't own any properties");
     }
 
+    private void sell() {
+        player[l].writeBelongings();
+        int choice = player[l].chooseProp();
+        if (player[l].isSellingProp()) {
+            System.out.println("You sold your property: " + player[l].getCertainBelong(choice));
+            player[l].receiveMoney(board.getSellPrize(player[l].getPropToSell(choice)));
+            board.removeOwner(player[l].getPropToSell(choice));
+            player[l].removeProp(choice);
+        }
+    }
 
     public void menus() {
         menuOptions();
@@ -151,14 +147,17 @@ public class GameLogic {
         String chooseOption = input.next();
         switch (chooseOption) {
             case "sell":
+            case "1":
                 sell();
                 sellTradeUpgrade();
                 break;
             case "trade":
+            case "2":
                 trade();
                 sellTradeUpgrade();
                 break;
             case "upgrade":
+            case "3":
                 upgrade();
                 sellTradeUpgrade();
                 break;
@@ -173,7 +172,9 @@ public class GameLogic {
     public void charging() {
         if (!board.ownsThePlace(pos, player[l].getPlayerNick())) {
             player[l].loseMoney(board.feeTax(pos));
-            System.out.println("You've been charged with " + board.feeTax(pos) + " leva.");
+            if (!board.isBankBelonging(pos)) {
+                System.out.println("You've been charged with " + board.feeTax(pos) + " leva.");
+            }
             for (int i = 0; i < playerNumber; i++) {
                 if (board.ownsThePlace(pos, player[i].getPlayerNick())) {
                     System.out.println("And player " + player[i].getPlayerNick() + " took them.");

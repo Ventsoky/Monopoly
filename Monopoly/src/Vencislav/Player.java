@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Player {
     private Scanner input = new Scanner(System.in);
     private Random rand = new Random();
-    private int dice1;
-    private int dice2;
+    private int dice1 = 1;
+    private int dice2 = 3;
     private int position;
     private String playerNick;
     private int money = 1500;
@@ -33,8 +33,8 @@ public class Player {
     }
 
     public void playerMovement() {
-        throwDice1();
-        throwDice2();
+//        throwDice1();
+//        throwDice2();
         if (position + dice1 + dice2 > 38) {
             position = (dice1 + dice2) - Math.abs(position - 38) - 1;
             money += 200;
